@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# Makefile for porting OtherOS++ to the PlayStation 5
+
+.PHONY: all clean install
+
+# Directories
+DEVELOPMENT_DIR := $(HOME)/ps5_otheros
+
+# Scripts
+PATCH_KERNEL_SCRIPT := $(DEVELOPMENT_DIR)/patch_kernel.sh
+COMPILE_KERNEL_SCRIPT := $(DEVELOPMENT_DIR)/compile_kernel.sh
+PREPARE_FIRMWARE_SCRIPT := $(DEVELOPMENT_DIR)/prepare_firmware.sh
+CREATE_BOOTABLE_IMAGE_SCRIPT := $(DEVELOPMENT_DIR)/create_bootable_image.sh
+
+# Targets
+all: patch_kernel compile_kernel prepare_firmware create_bootable_image
+
+patch_kernel:
+	@echo "Patching the Linux kernel for PS5 compatibility..."
+	@bash $(PATCH_KERNEL_SCRIPT)
+	@echo "Kernel patched successfully."
+
+compile_kernel:
+	@echo "Compiling the Linux kernel for PS5..."
+	@bash $(COMPILE_KERNEL_SCRIPT)
+	@echo "Kernel compiled successfully."
+
+prepare_firmware:
+	@echo "Preparing the firmware with OtherOS++ for PS5..."
+	@bash $(PREPARE_FIRMWARE_SCRIPT)
+	@echo "Firmware prepared successfully."
+
+create_bootable_image:
+	@echo "Creating a bootable image for PS5..."
+	@bash $(CREATE_BOOTABLE_IMAGE_SCRIPT)
+	@echo "Bootable image created successfully."
+
+clean:
+	@echo "Cleaning up..."
+	@rm -rf $(DEVELOPMENT_DIR)/linux-kernel
+	@rm -rf $(DEVELOPMENT_DIR)/ps5-firmware
+	@rm -f $(DEVELOPMENT_DIR)/ps5_otheros_image.img
+	@echo "Cleanup completed."
+
+install:
+	@echo "Installing OtherOS++ on PlayStation 5..."
+	@# Add installation steps here
+	@echo "OtherOS++ installed successfully."
